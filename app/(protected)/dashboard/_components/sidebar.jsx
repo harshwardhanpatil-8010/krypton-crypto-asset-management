@@ -67,7 +67,7 @@ export function AppSidebar() {
                       className="flex items-center gap-4 px-4 py-3 rounded-lg  group"
                     >
                       <item.icon className="w-5 h-5 text-gray-100 " />
-                      <span className="text-gray-700 font-medium">
+                      <span className="text-gray-700 font-medium cursor-pointer">
                         {item.title}
                       </span>
                     </a>
