@@ -58,6 +58,10 @@ export default function LoginPage() {
           <button type="submit" className="w-full bg-emerald-500 p-2 rounded text-white">
             Login
           </button>
+          <p className="text-white text-center mt-4">
+          Don't have an account? <a href="/register" className="text-emerald-400">Register</a>
+            </p>
+
         </form>
       </div>
     </div>
