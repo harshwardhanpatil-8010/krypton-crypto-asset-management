@@ -10,27 +10,27 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
       const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await res.json();
-
+  
       if (!res.ok) {
         setError(data.message);
       } else {
-        localStorage.setItem("token", data.token);
+        document.cookie = `token=${data.token}; path=/;`; // Store token in cookies
         router.push("/dashboard");
       }
     } catch (err) {
       setError("Something went wrong. Please try again.");
     }
   };
-
+  
   return (
     <div className="flex items-center justify-center h-screen bg-gray-900">
       <div className="bg-gray-800 p-8 rounded-xl shadow-lg w-96">

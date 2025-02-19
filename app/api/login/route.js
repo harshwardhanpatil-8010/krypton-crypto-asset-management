@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/db";
-
+import jwt from "jsonwebtoken";
 export async function POST(req) {
   try {
     const { email, password } = await req.json();
@@ -18,7 +18,10 @@ export async function POST(req) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
     }
 
-    return NextResponse.json({ message: "Login successful", token: process.env.JWT_TOKEN });
+    const token = jwt.sign({ email }, "your-secret-key", { expiresIn: "1h" });
+
+    return NextResponse.json({ message: "Login successful", token });
+
   } catch (error) {
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }

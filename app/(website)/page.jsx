@@ -18,7 +18,7 @@ export default function Home() {
     //   const data = await res.json();
   
     //   if (res.ok) {
-    //     localStorage.setItem("token", data.token); // Store token in localStorage
+    //     localStorage.setItem("token", data.token); 
     //     alert("Login successful!");
     //   } else {
     //     alert(data.error);
