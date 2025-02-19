@@ -54,8 +54,8 @@ export function AppSidebar() {
     <Sidebar className="bg-white border-r border-gray-200 shadow-lg z-50">
       <SidebarContent className="p-6">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-4xl text-white font-bold mt-2 tracking-tighter mb-12 justify-center">
-            KRYPTON
+          <SidebarGroupLabel className="text-4xl text-white font-bold mt-2 tracking-tighter mb-12 justify-center select-none">
+         <h1 className="select-none"> KRYPTON</h1>  
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

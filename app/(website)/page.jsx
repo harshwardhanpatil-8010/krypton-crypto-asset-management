@@ -1,8 +1,31 @@
 "use client"
 import Link from "next/link";
-import { useRouter } from 'next/navigation'
+//import { useState } from "react";
 export default function Home() {
-  const router = useRouter()
+ 
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
+  
+    // async function handleLogin(e) {
+    //   e.preventDefault();
+  
+    //   const res = await fetch("/api/auth/login", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ email, password }),
+    //   });
+  
+    //   const data = await res.json();
+  
+    //   if (res.ok) {
+    //     localStorage.setItem("token", data.token); // Store token in localStorage
+    //     alert("Login successful!");
+    //   } else {
+    //     alert(data.error);
+    //   }
+    // }
+  
+ 
   return (
     
    <div className="container p-9">
