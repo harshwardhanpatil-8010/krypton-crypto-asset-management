@@ -1,16 +1,11 @@
 import { NextResponse } from "next/server";
-import mysql from "mysql2/promise";
+import { connectToDatabase } from "@/lib/db";
 
 export async function POST(req) {
   try {
     const { email, password } = await req.json();
 
-    const connection = await mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "yourpassword",
-      database: "yourdatabase",
-    });
+    const connection = await connectToDatabase();
 
     const [rows] = await connection.execute(
       "SELECT * FROM users WHERE email = ? AND password = ?",
@@ -23,7 +18,7 @@ export async function POST(req) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
     }
 
-    return NextResponse.json({ message: "Login successful", token: "JWT_TOKEN" });
+    return NextResponse.json({ message: "Login successful", token: process.env.JWT_TOKEN });
   } catch (error) {
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
