@@ -1,29 +1,29 @@
 "use client"
 import Link from "next/link";
-//import { useState } from "react";
+import { useState } from "react";
 export default function Home() {
  
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
   
-    // async function handleLogin(e) {
-    //   e.preventDefault();
+    async function handleLogin(e) {
+      e.preventDefault();
   
-    //   const res = await fetch("/api/auth/login", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ email, password }),
-    //   });
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
   
-    //   const data = await res.json();
+      const data = await res.json();
   
-    //   if (res.ok) {
-    //     localStorage.setItem("token", data.token); 
-    //     alert("Login successful!");
-    //   } else {
-    //     alert(data.error);
-    //   }
-    // }
+      if (res.ok) {
+        localStorage.setItem("token", data.token); 
+        alert("Login successful!");
+      } else {
+        alert(data.error);
+      }
+    }
   
  
   return (

@@ -1,32 +1,33 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-  
+
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await res.json();
 
       if (!res.ok) {
         setError(data.message);
       } else {
-        Cookies.set("token", data.token, { expires: 1, path: "/" }); // Fix cookie path
-        console.log("Token set in cookies:", data.token);
-        router.push("/dashboard");
+        setSuccess("Registration successful! Redirecting to login...");
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
       }
     } catch (err) {
       setError("Something went wrong. Please try again.");
@@ -36,9 +37,10 @@ export default function LoginPage() {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-900">
       <div className="bg-gray-800 p-8 rounded-xl shadow-lg w-96">
-        <h2 className="text-white text-2xl mb-4">Login</h2>
+        <h2 className="text-white text-2xl mb-4">Register</h2>
         {error && <p className="text-red-500">{error}</p>}
-        <form onSubmit={handleLogin}>
+        {success && <p className="text-green-500">{success}</p>}
+        <form onSubmit={handleRegister}>
           <input
             type="email"
             placeholder="Email"
@@ -56,7 +58,7 @@ export default function LoginPage() {
             required
           />
           <button type="submit" className="w-full bg-emerald-500 p-2 rounded text-white">
-            Login
+            Register
           </button>
         </form>
       </div>
