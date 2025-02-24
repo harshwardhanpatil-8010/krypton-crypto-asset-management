@@ -24,7 +24,7 @@ export default function LoginPage() {
       if (!res.ok) {
         setError(data.message);
       } else {
-        Cookies.set("token", data.token, { expires: 1, path: "/" }); // Fix cookie path
+        Cookies.set("token", data.token, { expires: 1, path: "/" }); 
         console.log("Token set in cookies:", data.token);
         router.push("/dashboard");
       }

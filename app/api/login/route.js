@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 import { connectToDatabase } from "@/lib/db";
 
 export async function POST(req) {
@@ -6,10 +7,8 @@ export async function POST(req) {
     const { email, password } = await req.json();
     const connection = await connectToDatabase();
 
-    const [rows] = await connection.execute(
-      "SELECT * FROM users WHERE email = ? AND password = ?",
-      [email, password]
-    );
+
+    const [rows] = await connection.execute("SELECT * FROM users WHERE email = ?", [email]);
 
     await connection.end();
 
@@ -17,13 +16,17 @@ export async function POST(req) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
     }
 
-    const response = NextResponse.json({ message: "Login successful", token: "JWT_TOKEN" });
+    const user = rows[0];
 
-    response.cookies.set("token", "JWT_TOKEN", { httpOnly: true, path: "/" });
-    console.log("Token set in response cookies");
+    
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
+    }
 
-    return response;
+    return NextResponse.json({ message: "Login successful", userId: user.user_id });
   } catch (error) {
+    console.error("Login error:", error);
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }

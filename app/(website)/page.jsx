@@ -1,35 +1,29 @@
 "use client"
+
 import Link from "next/link";
-import { useState } from "react";
+
+import Navbar from "./navbar";
+
 export default function Home() {
  
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
   
-    async function handleLogin(e) {
-      e.preventDefault();
-  
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-  
-      const data = await res.json();
-  
-      if (res.ok) {
-        localStorage.setItem("token", data.token); 
-        alert("Login successful!");
-      } else {
-        alert(data.error);
-      }
-    }
-  
- 
-  return (
-    
-   <div className="container p-9">
-    <Link href="/dashboard" className="border-2 border-blue-400 hover:bg-blue-900/50 transition-all duration-300 transform hover:scale-105 px-10 py-3 text-lg rounded-xl backdrop-blur-sm">Dashboard</Link>
-   </div>
-  );
+    return (
+      <section className="min-h-screen flex flex-col justify-center items-center w-full">
+        <Navbar />
+        <div className="w-full flex flex-col items-center text-center px-4">
+          <h1 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold tracking-tight mb-10 mt-10">
+            Get started with Krypton
+          </h1>
+
+          <div className="p-6">
+            <Link 
+              href="/register" 
+              className="border-2 border-blue-400 hover:bg-blue-900/50 transition-all duration-300 transform hover:scale-105 px-10 py-3 text-lg rounded-xl backdrop-blur-sm"
+            >
+              Get Started
+            </Link>
+          </div>
+        </div>
+      </section>
+    );
 }

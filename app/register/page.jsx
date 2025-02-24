@@ -60,6 +60,10 @@ export default function RegisterPage() {
           <button type="submit" className="w-full bg-emerald-500 p-2 rounded text-white">
             Register
           </button>
+          <p className="text-white text-center mt-4">
+          Already have an account <a href="/login" className="text-emerald-400">Login</a>
+          </p>
+
         </form>
       </div>
     </div>

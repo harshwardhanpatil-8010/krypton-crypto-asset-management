@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Krypton",
-  description: "",
+  description: "Crypto asset management system",
 };
 
 export default function RootLayout({ children }) {
