@@ -8,22 +8,19 @@ export async function POST(req) {
 
     const connection = await connectToDatabase();
 
-    // Check if user already exists
+
     const [existingUser] = await connection.execute(
       "SELECT email FROM users WHERE email = ?",
       [email]
     );
-
     if (existingUser.length > 0) {
       await connection.end();
       return NextResponse.json({ message: "User already exists" }, { status: 400 });
     }
-
-    // Hash the password
+  
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Insert user into the database
     await connection.execute(
       "INSERT INTO users (email, password) VALUES (?, ?)",
       [email, hashedPassword]

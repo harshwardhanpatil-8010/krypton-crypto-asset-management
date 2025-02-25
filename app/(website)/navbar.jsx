@@ -6,7 +6,7 @@ export default function Navbar() {
       <div className="container mx-auto flex h-full items-center justify-between px-6">
         <div className="flex items-center gap-8">
           
-            <span className="font-bold text-2xl md:text-3xl text-white px-4">
+            <span className="font-bold text-2xl md:text-3xl text-white px-4 tracking-tighter">
               KRYPTON
             </span>
           

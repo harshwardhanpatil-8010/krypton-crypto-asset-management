@@ -8,7 +8,7 @@ export default function Home() {
  
   
     return (
-      <section className="min-h-screen flex flex-col justify-center items-center w-full">
+      <section className="min-h-screen flex flex-col justify-center items-center w-full ">
         <Navbar />
         <div className="w-full flex flex-col items-center text-center px-4">
           <h1 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold tracking-tight mb-10 mt-10">
