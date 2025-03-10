@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import ParticleBackground from "@/components/ui/particlebackground";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -35,8 +36,10 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
-      <div className="bg-gray-800 p-8 rounded-xl shadow-lg w-96">
+    <div className="flex items-center justify-center h-screen bg-krypton-900/20">
+      <ParticleBackground />
+      <div className="bg-krypton-400/20 p-8 rounded-xl shadow-lg w-96">
+      
         <h2 className="text-white text-2xl mb-4">Register</h2>
         {error && <p className="text-red-500">{error}</p>}
         {success && <p className="text-green-500">{success}</p>}

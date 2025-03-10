@@ -2,20 +2,18 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-16 w-full">
-      <div className="container mx-auto flex h-full items-center justify-between px-6">
+    <nav className="fixed top-2 z-50 w-full bg-krypton-900/80 backdrop-blur-sm shadow-lg rounded-lg ">
+      <div className="container mx-auto flex h-16 items-center justify-between px-6">
         <div className="flex items-center gap-8">
-          
-            <span className="font-bold text-2xl md:text-3xl text-white px-4 tracking-tighter">
-              KRYPTON
-            </span>
-          
+          <span className="font-bold text-2xl md:text-3xl text-white px-4 tracking-tighter hover:text-krypton-500 transition-colors duration-200">
+            KRYPTON
+          </span>
         </div>
 
         <div className="flex items-center gap-4">
           <Link
             href="/login"
-            className="border-2 border-gray-400 bg-gradient-to-br from-[#090929] to-[#212139] text-white transition-all duration-300 transform hover:scale-105 px-6 py-2 text-lg rounded-xl"
+            className="bg-krypton-500 hover:bg-krypton-600 text-white px-8 py-2.5 rounded-lg text-lg font-medium transition-all duration-200 hover:shadow-lg hover:shadow-krypton-500/30 active:scale-95"
           >
             Login
           </Link>
@@ -24,3 +22,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import ParticleBackground from "@/components/ui/particlebackground";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -26,6 +27,7 @@ export default function LoginPage() {
       } else {
         Cookies.set("token", data.token, { expires: 1, path: "/" }); 
         console.log("Token set in cookies:", data.token);
+   
         router.push("/dashboard");
       }
     } catch (err) {
@@ -34,8 +36,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
-      <div className="bg-gray-800 p-8 rounded-xl shadow-lg w-96">
+    <div className="flex items-center justify-center h-screen bg-krypton-900/20">
+      <ParticleBackground />
+      <div className="bg-krypton-400/20 p-8 rounded-xl shadow-lg w-96">
         <h2 className="text-white text-2xl mb-4">Login</h2>
         {error && <p className="text-red-500">{error}</p>}
         <form onSubmit={handleLogin}>

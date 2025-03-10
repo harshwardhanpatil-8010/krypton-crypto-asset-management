@@ -6,11 +6,12 @@ import { AppSidebar } from "./_components/sidebar";
 function Dashboard() {
 
   return (
-    <SidebarProvider className="bg-black">
+    <SidebarProvider className="bg-krypton-900/20">
       <AppSidebar />
       <div className="flex-1 p-10">
         <SidebarTrigger className="md:hidden xl:hidden 2xl:hidden lg:hidden" />
         <h1 className="text-4xl text-white font-bold">Dashboard</h1>
+        
       </div>
     </SidebarProvider>
   );
