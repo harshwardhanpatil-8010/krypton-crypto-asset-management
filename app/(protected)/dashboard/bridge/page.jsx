@@ -10,6 +10,7 @@ function bridge() {
          <div className="flex-1 p-10">
            <SidebarTrigger className="md:hidden xl:hidden 2xl:hidden lg:hidden" />
            <h1 className="text-4xl text-white font-bold">Bridge</h1>
+                  <Separator className="my-4 border-2 " />
          </div>
     
      </SidebarProvider>

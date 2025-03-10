@@ -9,7 +9,7 @@ import Navbar from './navbar';
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center pt-24 pb-16 px-4 overflow-hidden">
-]
+
       <ParticleBackground/>
       <Navbar/>
       <div className="absolute inset-0 opacity-20 pointer-events-none">

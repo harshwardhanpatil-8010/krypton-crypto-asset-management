@@ -106,11 +106,11 @@ export default {
 			'glow': {
 				'0%, 100%': { 
 					boxShadow: '0 0 5px rgba(56, 189, 248, 0.5)',
-					borderColor: 'rgba(56, 189, 248, 0.4)'
+					borderColor: 'rgba(56, 189, 248, 1.0)'
 				},
 				'50%': { 
 					boxShadow: '0 0 20px rgba(56, 189, 248, 0.8), 0 0 30px rgba(56, 189, 248, 0.3)',
-					borderColor: 'rgba(56, 189, 248, 0.8)'
+					borderColor: 'rgba(56, 189, 248, 1.0)'
 				}
 			},
 			'counter': {
