@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Separator } from "@/components/ui/separator"
-
+import { useEffect, useState } from "react"
 
 const items = [
   {
@@ -60,6 +60,33 @@ const items = [
 
 export function AppSidebar() {
 
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/api/login", { method: "GET" });
+      if (response.ok) {
+        window.location.href = "/login"; 
+      }
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
+  const [data, setData] = useState({ emails: [] });
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/data");
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className="bg-krypton-600">
     <Sidebar >
@@ -98,7 +125,8 @@ export function AppSidebar() {
       <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
-                    <User2 /> Username
+                  <User2 className="mr-2" />
+                  {loading ? "Loading..." : data.emails.length > 0 ? data.emails[0].email : "No Email"}
                     <ChevronUp className="ml-auto h-24" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
@@ -112,7 +140,7 @@ export function AppSidebar() {
                   <DropdownMenuItem>
                     <span>Billing</span>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleLogout}>
                     <span>Sign out</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

@@ -1,10 +1,12 @@
 
 import React from 'react';
-import { Button } from "@/components/ui/button";
+
 import { ArrowRight } from 'lucide-react';
-import ParticleBackground from '@/components/ui/particlebackground';
+
 import Link from 'next/link';
 import Navbar from './navbar';
+import ParticleBackground from '@/components/ui/particlebackground';
+
 
 const Hero = () => {
   return (

@@ -32,3 +32,15 @@ export async function POST(req) {
  
  
 }
+export async function GET() {
+  try {
+    const response = NextResponse.json({ message: "Logged out successfully" });
+    response.cookies.set("token", "", { maxAge: 0 }); 
+    return response;
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Logout failed", error: error.message },
+      { status: 500 }
+    );
+  }
+}
