@@ -1,27 +1,32 @@
-"use client"
-import { ArrowDown, ArrowUp, DollarSign } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+"use client";
+import { ArrowDown, ArrowUp, DollarSign } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
+
 export function PortfolioSummary({ className }) {
-  const [data, setData] = useState({ userIds: [] });
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchUserData = async () => {
       try {
-        const response = await fetch("/api/data"); 
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
+        const res = await fetch("/api/data", {
+          credentials: "include",
+        });  
+        if (!res.ok) {
+          console.error("Unauthorized or error fetching data");
+          return;
         }
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+        const json = await res.json();
+        setUser(json.user);
+      } catch (err) {
+        console.error("Failed to fetch user data", err);
       }
     };
 
-    fetchData();
+    fetchUserData();
   }, []);
+
   return (
     <Card className={className}>
       <CardHeader>
@@ -41,11 +46,9 @@ export function PortfolioSummary({ className }) {
               <div className="flex items-center">
                 <div className="flex items-center gap-2">
                   <DollarSign className="h-4 w-4 text-muted-foreground" />
-                  {data.userIds.map((item, index) => (
-                  <span className="text-3xl font-bold" key={index}>  
-                   {item.user_id}
-                    </span>
-              ))}
+                  <span className="text-3xl font-bold">
+                    {user?.user_id || "Loading..."}
+                  </span>
                   </div>
                 <div className="ml-auto flex items-center gap-1 text-emerald-500">
                   <ArrowUp className="h-4 w-4" />
@@ -109,4 +112,3 @@ export function PortfolioSummary({ className }) {
     </Card>
   )
 }
-

@@ -68,7 +68,7 @@ export function AssetsList({ className }) {
               <TableHead className="hidden md:table-cell">Amount</TableHead>
               <TableHead className="text-right">Value</TableHead>
               <TableHead className="hidden md:table-cell text-right">Price</TableHead>
-              <TableHead className="text-right">24h</TableHead>
+              
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -89,17 +89,8 @@ export function AssetsList({ className }) {
                 <TableCell className="text-right">
                   <div className="font-medium">${asset.value.toLocaleString()}</div>
                 </TableCell>
-                <TableCell className="hidden md:table-cell text-right">${asset.price.toLocaleString()}</TableCell>
-                <TableCell className="text-right">
-                  <div
-                    className={`flex items-center justify-end gap-1 ${
-                      asset.positive ? "text-emerald-500" : "text-rose-500"
-                    }`}
-                  >
-                    {asset.positive ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
-                    <span>{Math.abs(asset.change)}%</span>
-                  </div>
-                </TableCell>
+                <TableCell className="hidden md:table-cell text-right text-emerald-500">${asset.price.toLocaleString()}</TableCell>
+                
               </TableRow>
             ))}
           </TableBody>

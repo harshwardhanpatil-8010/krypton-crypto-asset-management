@@ -1,21 +1,26 @@
+import { cookies } from "next/headers";
 import { connectToDatabase } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const db = await connectToDatabase();
+  const cookieStore = cookies(); 
+  const userId = cookieStore.get("userId")?.value;
+
+  if (!userId) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
   try {
-    const [emails] = await db.query("SELECT email FROM users");
-    const [userIds] = await db.query("SELECT user_id FROM users");
+    const db = await connectToDatabase();
+    const [userDetails] = await db.query("SELECT user_id, email FROM users WHERE user_id = ?", [userId]);
+    
 
     return NextResponse.json({
-      emails,
-      userIds
+      user: userDetails[0],
+      
     });
   } catch (error) {
-    console.error("Database Error:", error);
-    return NextResponse.json(
-      { message: "Error fetching data", error: error.message },
-      { status: 500 }
-    );
+    console.error("Database error:", error);
+    return NextResponse.json({ message: "Error fetching data", error: error.message }, { status: 500 });
   }
 }

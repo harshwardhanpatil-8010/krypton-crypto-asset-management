@@ -70,22 +70,26 @@ export function AppSidebar() {
       console.error("Logout failed", error);
     }
   };
-  const [data, setData] = useState({ emails: [] });
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchUserData = async () => {
       try {
-        const response = await fetch("/api/data");
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
+        const res = await fetch("/api/data", {
+          credentials: "include",
+        });  
+        if (!res.ok) {
+          console.error("Unauthorized or error fetching data");
+          return;
         }
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+        const json = await res.json();
+        setUser(json.user);
+      } catch (err) {
+        console.error("Failed to fetch user data", err);
       }
     };
-    fetchData();
+
+    fetchUserData();
   }, []);
   return (
     <div className="bg-krypton-600">
@@ -126,7 +130,7 @@ export function AppSidebar() {
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
                   <User2 className="mr-2" />
-                  {loading ? "Loading..." : data.emails.length > 0 ? data.emails[0].email : "No Email"}
+                  {user?.email || "Loading..."}
                     <ChevronUp className="ml-auto h-24" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
@@ -141,7 +145,7 @@ export function AppSidebar() {
                     <span>Billing</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleLogout}>
-                    <span>Sign out</span>
+                    <span className="cursor-pointer">Sign out</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

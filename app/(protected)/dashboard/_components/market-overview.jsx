@@ -66,10 +66,7 @@ export function MarketOverview({ className }) {
             <CardTitle>Market Overview</CardTitle>
             <CardDescription>Top cryptocurrencies by market cap</CardDescription>
           </div>
-          <div className="relative w-full sm:w-[200px]">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input type="search" placeholder="Search markets..." className="w-full bg-background pl-8" />
-          </div>
+        
         </div>
       </CardHeader>
       <CardContent>
