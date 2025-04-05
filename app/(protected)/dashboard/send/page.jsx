@@ -20,9 +20,31 @@ export default function SendCrypto() {
     Bitcoin: ["BTC", "WBTC", "USDT"],
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!recipient || !amount) return alert("Please enter all fields.");
-    alert(`Sending ${amount} ${selectedToken} to ${recipient} on ${selectedNetwork}.`);
+      const res = await fetch("api/data",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            recipient,
+            amount,
+           network:  selectedNetwork,
+           token: selectedToken,
+          }),
+        
+        }
+      );
+      const data = await res.json;
+      if(res.ok){
+        alert("transaction recorded succesfully");
+        setRecipient("");
+        setAmount("");
+      }else{
+        alert("Error")
+      }
    
   };
 
